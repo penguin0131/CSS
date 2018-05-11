@@ -1,0 +1,47 @@
+@ direction 
+-> 글자 쓰기 방향 지정 속성 
+
+ltr		: 왼쪽에서 오른쪽으로 텍스트를 표시 
+rtl		: 오른쪽에서 왼쪽으로 텍스트를 표시 
+
+기본 형식
+
+<style>
+선택자 {direction : ltr 또는 rtl;} 
+<style>
+
+@ text-align
+-> 문자 위치를 조정(정렬)하는 속성 
+
+left 		: 왼쪽에 맞추어 정렬
+right 		: 오른쪽에 맞추어 정렬
+center	 	: 가운데에 맞추어 정렬
+justify 	: 양쪽에 맞추어 정렬
+
+@ text-indent
+-> 문장을 들여쓰기 하는 속성 
+
+기본 형식 
+
+<style> 
+선택자{text-indent: 숫자(단위);} 
+</style> 
+
+@ line-height
+-> 문장끼리의 줄간격을 조정하는 속성 
+
+기본 형식 
+<style> 
+선택자 {line-height: normal 또는 숫자(단위);}
+</style> 
+
+@ text-overflow 
+-> 영역을 벗어나는 텍스트 표시 속성 
+
+clip: 		영역을 넘어가는 텍스트를 자름 
+ellipsis	:말 줄임으로 잘린 텍스트를 표현 
+
+기본 형식
+<style>
+선택자{text-overflow:clip 또는 ellipsis;}
+</style> 

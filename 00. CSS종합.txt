@@ -1,0 +1,3130 @@
+
+
+@ CSS란
+-> Cascading Style Sheets의 약자
+-> 웹문서의 전반적인 스타일을 미리 저장해 둔 스타일 시트
+-> 기존 HTML은 다양하게 설계하고 수시로 변경하는데 많은 제약이 따름
+	이를 보완하기 위해 만들어진 것이 스타일 시트
+-> 문서 작성 내용과 꾸미는 부분을 분리하여 내용을 수정하여도 디자인을 바꿀
+	필요가 없고, 디자인을 수정해도 글 내용을 바꿀 필요가 없어지게 만듦
+
+
+
+스타일 시트 기본 형식
+
+ex)
+
+<style>
+p { text-align : center; }
+</style>
+
+p		: 선택자
+text-align	: style 속성
+center		: 속성 값
+
+
+* CSS에서 가장 중요한 것은 선택자! 선택자를 잘 쓸 줄 알아야지만
+	Front 개발자 입장에서 변경하고자 하는 것을 선택할 수 있음
+
+
+@ 내부 스타일 시트
+-> <style></style>를 사용하여 내부에 스타일 정보를 저장하는 기법
+-> 내부에 스타일 시트를 정의하고 사용 하게 됨(해당 페이지에서 계속 사용)
+
+ex)
+<style>
+	p { text-align : center; }
+</style>
+
+
+
+ex)
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+	<style>
+		p {text-align: center;
+			color : red;
+			background: yellow;}
+	</style>
+</head>
+
+<body>
+
+	<p>내용</p>
+
+</body>
+</html>
+
+
+
+@ 외부 스타일 시트
+-> <link> 태그를 이용하여 css파일을 읽어와서 스타일을 적용
+-> 외부에서 가져온 것이기 때문에 다른 페이지에서도 호출해서 사용 가능
+
+ex) <link href="css파일경로" rel="stylesheet" type="text/css">
+
+ex)
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="test.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<p>내용</p>
+	<p>내용2</p>
+</body>
+</html>
+
+
+
+@ 인라인 스타일 시트
+-> 태그 내부에 스타일 정보를 지정하는 방법
+-> 해당 내부 태그에 정의 한 것이기 때문에 해당 태그에만 적용
+
+ex) <p style="color:pink"> 인라인 스타일 시트 적용 </p>
+
+ex)
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+<body>
+	<p style="text-align:center; color:red; background-color:yellow;">내용</p>
+	<p>내용2</p>
+</body>
+</html>
+
+
+
+
+@ CSS 선택자
+-> CSS에서는 선택자를 잘 쓰는 것이 CSS를 잘하게 되는 것 중 하나!
+
+선택자의 종류
+
+전체 선택자	: *
+태그 선택자	: 태그 (h1, p, li 등등...)
+아이디 선택자	: #아이디명
+클래스 선택자	: .클래스명
+후손 선택자	: 선택자 선택자
+자손 선택	: 선택자 > 선택자
+
+속성 선택자	: 선택자[속성=값]/선택자[속성~=값]
+		선택자[속성|=값]/선택자[속성^=값]
+		선택자[속성$=값]/선택자[속성*=값]
+
+동위 선택자	: 선택자 + 선택자 / 선택자 ~ 선택자
+
+구조 선택자	: 선택자 : first-child	/ 선택자 : last-child
+		선택자 : nth-child(수열) / 선택자 : nth-last-child(수열)
+		선택자 : first-of-type / 선택자 : last-of-type
+		선택자 : nth-of-type(수열) / 선택자 : nth-last-of-type(수열)
+
+반응 선택자	: 선택자: active / 선택자:hover
+
+상태 선택자	: :checked / :focus
+
+속성 선택자	: :enabled / :disabled
+
+링크 선택자	: :link	/ visited
+
+문자 선택자	: ::first-letter / ::first-line
+		  :: after / ::before / ::selection
+
+부정 선택자	: :선택자:not(선택자)
+
+
+
+
+@ 전체 선택자
+-> html 문서 안에 있는 모든 태그에 적용되는 스타일 선택자
+
+기본 형식
+
+* { 설정내용; }
+
+* 전체 태그는 body 태그에 있는 요소뿐만 아니라 html, head에도 적용이 됨
+
+ex) * { color : red; }
+
+
+
+@ 태그 선택자
+-> 특정 태그에만 적용되는 스타일 선택자
+
+기본 형식
+
+태그명 { 설정내용; }
+* 여러개의 태그를 선택시에는 ','(쉼표)로 구별하여 작성
+
+
+ex) p,div { color : red; }
+
+
+
+
+@ 아이디 / 클래스 선택자
+-> 아이디 선택자 : 태그 속성 id를 설정하고 id 값을 선택자로 쓰는 것 (#)
+-> 클래스 선택자 : 태그 속성 class를 설정하고 class값을 선택자로 하는것 (.)
+
+기본형식
+
+id : #아이디명 { 설정내용; } 
+
+class : .클래스명 { 설정내용; }
+
+* 클래스 선택자는 중복을 허용하고 id 선택자는 중복 허용을 하지 않음
+ 코드상에서는 에러는 없지만 javascript의 DOM 에서 id 값으로 페이지 요소를
+가져오기 때문에 중복을 허용하지 않음
+
+* 클래스는 중복을 허용하기 때문에 영역을 명확하게 하기 위해
+태그 선택자와 같이 쓰는 경우도 있음
+
+
+
+	3가지 값
+	name : 다른 페이지로 값을 넘길때 사용하는 구분자
+	id : 태그들 끼리 구분하기 위한 구분자
+	class : 그룹으로 묶어서 구분하기 위한 구분자
+
+
+ex)
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	#p1{color:red;}
+	#p2{color:blue;}
+	#p3{color:green;}
+	.pclass{background-color : beige}
+</style>
+</head>
+
+<body>
+
+	<p id="p1" class="pclass"> 내용1</p>
+	<p id="p2"> 내용2</p>
+	<p id="p3" class="pclass"> 내용3</p>
+
+</body>
+
+
+
+
+@ 기본 속성 선택자
+-> 태그 선택자와 함께 사용하는 선택자로 뒤에 []를 사용하여 속성과 속성값을 사용
+
+기본 형식
+
+선택자[속성] { 설정내용; }
+선택자[속성=속성값] { 설정내용; }
+
+ex)
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	p[name] {color:aquamarine}
+	p[id] {color: salmon}
+	p[id="p3"]{background-color : lavender}
+</style>
+</head>
+
+<body>
+
+	<p name="p1">내용1</p>
+	<p id="p2">내용2</p>
+	<p id="p3">내용3</p>
+
+</body>
+</html>
+
+
+
+
+
+@ 문자열 속성 선택자
+-> 특정 문자열을 확인하여 스타일을 적용하는 방식으로 특별한 경우에만 사용
+
+선택자 [속성~=값] : 속성값이 특정 값을 단어로 포함하는 태그 선택(띄어쓰기로 구문)
+선택자 [속성|=값] : 속성값이 특정 값을 단어로 포함하는 태그 선택 "_" 으로 구분
+		(-앞의 내용값이 동일해야함)
+	-> name이든, class 이든 선언시 -로 구성된 것 이어야 함
+
+선택자 [속성^=값] : 속성값이 특정 값으로 시작하는 태그 선택
+선택자 [속성$=값] : 속성값이 특정 값으로 끝나는 태그 선택
+선택자 [속성*=값] : 속성값이 특정 값을 포함하는 태그 선택
+
+
+ex1)
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	p[id~="test"]{color : lavender}
+	p[class|="class"]{background-color:yellow;}
+</style>
+</head>
+
+<body>
+	<p id="test 1" class="class-c1">내용1</p>
+	<p id="test 2" class="c1">내용2</p>
+	<p id="test 3" class="c1">내용3</p>
+	<p id="test 4" class="c2">내용4</p>
+	<p id="test 5" class="c2">내용5</p>
+	<p id="test 6" class="class-c2">내용6</p>
+	<p id="etc">기타 내용</p>
+
+</body>
+</html>
+
+
+--------------------------------------------------------
+ex2)
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style>
+		p[id^="id"] {
+			color: darkseagreen;
+		}
+
+		p[class$="c1"] {
+			background-color: antiquewhite;
+		}
+		
+		p[class*="p"]{
+			font-weight : bold;
+		}
+		
+	</style>
+</head>
+
+<body>
+	<p name="test 1" id="i1" class="p-class-c1">내용1</p>
+	<p name="test 2" id="i2" class="c1">내용2</p>
+	<p name="test 3" id="i3" class="c1">내용3</p>
+	<p name="test 4" id="id4" class="c2">내용4</p>
+	<p name="test 5" id="id5" class="c2">내용5</p>
+	<p name="test 6" id="id5" class="class-p-c2">내용6</p>
+	<p name="etc">기타 내용</p>
+
+</body>
+</html>
+
+
+
+@ 후손 선택자 / 자손 선택자
+-> 후손은 내 아래 모든 것
+-> 자손은 내 직속 아래
+
+
+<body>
+	<div>
+		<h1></h1>
+		<h1></h1>
+		<ul>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+</body>
+-> div 입장에서는 h1,h2,ul 태그가 자손 태그
+-> div 입장에서 li 태그는 자손태그는 아니지만 후손 태그라고 볼 수 있음
+
+
+
+사용법
+
+후손 선택자
+-> 선택자 후손선택자 { 설정내용;}
+
+자손 선택자
+-> 선택자>자손선택자 { 설정내용; }
+
+* 여러개의 자손 선택 가능 (선택자>자손>자손>자손...)
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style>
+		#div-test>ul>li { color:red; } //자손의 자손을 선택(li만 red)
+		
+	</style>
+</head>
+
+<body>
+	<div id="div-test">
+		<h1>div 자손1</h1>
+		<h2>div 자손2</h2>
+		<ul>
+			<li>div 후손이자 ul자손</li>
+			<li>div 후손이자 ul 자손2</li>
+			<span>div 후손이자 ul 자손3</span>
+		</ul>
+	</div>
+</body>
+</html>
+
+
+
+
+@ 동위 선택자
+-> 동위 관계에서 뒤에서 위치한 태그를 선택할 때 사용
+
+동위 선택자a+동위선택자b : 동위 선택자a의 바로 뒤에 있는 한개의 선택자만 선택
+동위 선택자a~동위선택자b : 동위선택자 a의 뒤에 있는 선택자 b 모두 선택
+
+* 같은 자손(형제) 끼리는 동위 관계라고 볼 수 있음
+
+<div>
+	<h1></h1>
+	<p></p>
+	<p></p>
+	<ul>
+		<li></li>
+		<li></li>
+	</ul>
+</div>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월24일</title>
+	<style>
+				
+		h1~p{color : dodgerblue;}
+		h1+p{background-color : antiquewhite;}
+		
+		h1~ul{color : blueviolet;}
+		h1+ul{color : aqua;} //변화없음
+	</style>
+</head>
+
+<body>
+
+	<div>
+		<h1>형제1</h1>
+		<p>형제2</p>
+		<p>형제3</p>
+		<ul>
+			<li>조카1</li>
+			<li>조카2</li>
+		</ul>
+	</div>
+</body>
+</html>
+
+
+
+@ 반응 선택자
+-> 사용자의 움직임에 따라 달라지는 선택자
+
+선택자 : active -> 사용자가 클릭한 태그 선택
+선택자 : hover  -> 사용자의 마우스가 올라가 있는 태그 선택
+
+기본형식
+
+선택자 : active { 설정내용; }
+선택자 : hover	{ 설정내용; }
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월24일</title>
+	<style>
+		p:active{color : salmon; }
+		p:hover{background-color : aquamarine;
+				cursor : pointer;}
+	</style>
+</head>
+
+<body>
+	<p>내용1</p>
+	<p>내용2</p>
+	<p>내용3</p>
+	<p>내용4</p>
+	<p>내용5</p>
+	<p>내용6</p>
+</body>
+</html>
+
+
+
+
+@ 상태 선택자
+-> 입력 양식의 상태에 따라 선택되는 선택자
+
+input 태그 : checked	-> 체크 상태의 input 태그 선택 (체크가 되었다면!)
+input 태그 : focus	-> 초점이 맞추어진 input 태그 선택
+
+option태그 : enabled -> 사용가능한 option 태그 선택
+option태그 : disabled-> 사용불가능한 option 태그 선택
+
+ ex1)
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월24일</title>
+	<style>
+		input:focus {
+			background-color: skyblue;
+			border: 5px solid blue;
+		}
+		
+		input:checked{
+			height:20px; width:20px;
+		}
+	</style>
+</head>
+
+<body>
+	<fieldset>
+		<legend>정보 입력</legend>
+		이름 : <input type="text"><br> 나이 : <input type="text"><br> 성별 : 남자
+		<input type="radio" name="gender"> 여자
+		<input type="radio" name="gender">
+		<br> 취미 : 노래
+		<input type="checkbox"> 운동
+		<input type="checkbox"> 공부
+		<input type="checkbox"> 댄스
+		<input type="checkbox">
+
+	</fieldset>
+</body>
+</html>
+
+
+ ex2)
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월24일</title>
+	<style>
+		option:enabled{color : blue;}
+		option:disabled{background-color : red;}
+	</style>
+</head>
+
+<body>
+	<fieldset>
+		<legend>회원가입(19세 이하 가입 불가)</legend>
+		ID : <input type="text" id="id"><br>
+		PW : <input type="text" id="pw"><br>
+		이름 : <input type="text" id="name"><br>
+		나이 : 
+		<select>
+			<option value="10" disabled>10대</option>
+			<option value="20">20대</option>
+			<option value="30">30대</option>
+			<option value="40">40대</option>
+			<option value="50">50대</option>
+			<option value="60">60대 이상</option>
+		</select>
+
+	</fieldset>
+</body>
+</html>
+
+
+
+
+@ 일반 구조 선택자
+-> 특정한 위치에 있는 태그 선택 (위치로만 구분)
+
+:first-child		-> 형제 관계 태그 중 첫번째 태그 선택
+:last-child		-> 형재 관계 태그 중 마지막 태그 선택
+:nth-child(수열)	-> 형제 관계 태그 중 앞에서 수열 번째 태그 선택
+:nth-last-child(수열)	-> 형제 관계 태그 중 뒤에서 수열 번재 태그 선택
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월24일</title>
+	<style>
+		p:first-child{color:red;}
+		p:nth-child(2){color: coral;}
+		p:nth-child(3){color: papayawhip;}
+		p:nth-child(4){color: green;}
+		p:nth-last-child(2){color: skyblue;}
+		p:last-child{color:lavender;}
+		
+	</style>
+</head>
+
+<body>
+	<div>
+		<p>내용1</p>
+		<p>내용2</p>
+		<p>내용3</p>
+		<p>내용4</p>
+		<p>내용5</p>
+		<p>내용6</p>
+	</div>
+</body>
+</html>
+
+
+
+@ 형태 구조 선택자
+-> 특정한 위치에 있는 태그 선택(태그별로 구분)
+
+:first-of-type		-> 형제 관계 태그 중 첫번째 태그 선택
+:last-of-type		-> 형제 관계 태그 중 마지막 태그 선택
+:nth-of-type(수열)	-> 형제 관계 태그 중 앞에서 수열번째 태그 선택
+:nth-last-of-type(수열)	-> 형제 관계 태그 중 뒤에서 수열번째 태그 선택
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월24일</title>
+	<style>
+		h4:first-of-type{color:red;}
+		h4:nth-of-type(2){color:skyblue;}
+		
+	</style>
+</head>
+
+<body>
+	<div>
+		<p>내용1</p>
+		<h4>내용2</h4>
+		<p>내용3</p>
+		<h4>내용4</h4>
+		<p>내용5</p>
+		<h4>내용6</h4>
+		<p>내용7</p>
+		<h4>내용8</h4>
+	</div>
+</body>
+</html>
+
+
+
+@ 링크 선택자
+-> 링크(href)가 걸려있는 태그를 선택하는 선택자
+
+:link		-> 방문전(링크를 가기전 상태) 링크 선택자
+:visited	-> 방문후(링크를 간적 있는 상태) 링크 선택자
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월24일</title>
+	<style>
+		p::first-letter{color:red;}
+		
+	</style>
+</head>
+
+<body>
+	<a href="http://www.naver.com">네이버</a><br>
+	<a href="http://www.google.com">구글</a><br>
+	<a href="http://www.daum.net">다음</a><br>
+</body>
+</html>
+
+
+
+@ 문자 선택자
+-> 태그 내부에서 특정 조건의 문자를 선택하는 선택자
+
+선택자::first-letter	-> 첫 번째 글자를 선택
+선택자::first-line	-> 첫 번째 줄을 선택
+선택자::after		-> 태그 뒤에 위치하는 공간을 선택
+선택자::before		-> 태그 앞에 위치하는 공간을 선택
+선택자::selection	-> 사용자가 드래그한 글자 선택
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월24일</title>
+	<style>
+		p::first-letter{color:red;}
+		p::first-line{background-color:antiquewhite;}
+		p::after{content:"물어보지맛!"}
+		p::before{content:"(before태그 앞에 위치하는 공간을 선택) "}
+		p::selection{color:hotpink}
+		
+		
+	</style>
+</head>
+
+<body>
+	<p>테스트 입니다.<br>
+	어떤가요?</p>
+</body>
+</html>
+
+
+
+@ 부정 선택자
+-> 선택자를 제외한 나머지를 말함
+
+요소 : not(선택자)
+
+
+
+@ CSS 우선 순위
+
+## 적용 방법에 따른 우선 순위
+
+스타일 태그 < class 스타일 < id스타일 < 인라인 스타일 <!important
+
+
+* !important가 가장 높은 우선 순위를 가짐
+
+
+## 동일한 선택자 일시 우선순위
+-> 나중에 작성된 스타일이 최종 적용됨
+
+ ex)
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월24일</title>
+	<style>
+		p{color:red !important;}
+		.pp{color:blue;}
+		#p3{color:aqua;}
+		
+	</style>
+</head>
+
+<body>
+	<p id="p2"  class="pp" style="color: green;">내용</p>
+	
+</body>
+</html>
+
+
+
+
+[02-1. CSS 텍스트 스타일]
+
+
+@ CSS 단위 구성
+
+상대 크기
+-> %	: 기본 설정된 크기에서 상대적인 크기 설정 (초기설정 100%)
+-> em	: 부모 요소의 크기가 기준이 됨 (배수를 의미) 1배=1em=100%, 1.5배=1.5em=150%와 같음
+
+절대 크기
+-> px	: 기본 지정된 크기
+-> pt	: 기본 지정된 크기 (포인트값)
+
+* http://pxtoem.com
+
+
+
+@ 색상 표현
+영문색 이름 : 영문으로 색 이름을 작성
+	-> red,black,blue,orange 등등...
+
+16진수 표현	: RGB값을 기준으로 16진수로 작성
+	-> #16진수 3자리 입력
+	ex) #ff0000(빨간색) == #f00(2자리씩 보았을때 같은 값은 1개로 줄일 수 있음)
+
+rgb/rgba	: RGB값을 0~255로 입력, RGBA는 투명도 표현도 가능
+	-> rgb(0~255, 0~255, 0~255) 입력 예시) rgb(255,0,0)
+	-> rgba(0~255, 0~255, 0~255, 0~1) 입력
+		- rgba는 투명도 표시 (투명:0 / 불투명:1 / 반투명:0.5)
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월24일</title>
+	<style>
+		p {
+			color: RGBA(255,0,0,0.5);
+		}
+		
+		
+	</style>
+</head>
+
+<body>
+	<p>내용</p>
+
+</body>
+</html>
+
+
+
+
+@ font-family
+-> 폰트의 글꼴을 설정해주는 속성
+-> 글꼴이름1이 없으면 글꼴2, 글꼴3으로 선택되어 설정됨
+-> 다 없으면 브라우저에서 사용되는 기본 글꼴을 적용 됨
+
+
+기본 형식
+
+선택자 { font-family : 글꼴1, [글꼴2, 글꼴3]; }
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월24일</title>
+	<style>
+		#p1{font-family:"궁서체","아름체","고딕체";}
+		#p2{font-family:"고딕체","민수체","굴림체";}
+		#p3{font-family:"바탕체","고딕체","굴림체";}
+		#p4{font-family:"아름체","바탕체","궁서체";}
+		
+		
+	</style>
+</head>
+
+<body>
+	<p id="p1">다람쥐 헌 쳇바퀴에 타고파</p>
+	<p id="p2">다람쥐 헌 쳇바퀴에 타고파</p>
+	<p id="p3">다람쥐 헌 쳇바퀴에 타고파</p>
+	<p id="p4">다람쥐 헌 쳇바퀴에 타고파</p>
+
+</body>
+</html>
+
+
+
+
+@ font-size
+-> 글자의 크기를 조절하는 속성
+
+단위 : em,px,pt 등등 ....
+
+기본형식
+
+선택자 {font-size : 숫자 단위;}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월24일</title>
+	<style>
+		#p1{font-size: 2em;}
+		#p2{font-size: 20px;}
+		#p3{font-size: 40px;}
+		#p4{font-size: 40pt;}
+		
+		
+	</style>
+</head>
+
+<body>
+	<p id="p1">다람쥐 헌 쳇바퀴에 타고파</p>
+	<p id="p2">다람쥐 헌 쳇바퀴에 타고파</p>
+	<p id="p3">다람쥐 헌 쳇바퀴에 타고파</p>
+	<p id="p4">다람쥐 헌 쳇바퀴에 타고파</p>
+	<p id="p5">다람쥐 헌 쳇바퀴에 타고파</p>
+
+</body>
+</html>
+
+
+@ font-weight
+-> 글자 굵기를 조절하는 속성
+
+구분값
+normal		: 기본형태
+bold		: 굵게 표시
+bolder		: 기본보다 더 굵게 표시
+lighter		: 기본보다 더 가늘게 표시
+100 ~ 900	: 400이 normal 값, 700이 bold값 (세밀한 조절이 가능함)
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월24일</title>
+	<style>
+		#p1{font-weight: 100;}
+		#p2{font-weight: 700;}
+		#p3{font-weight: bolder;}
+		#p4{font-weight: lighter;}
+		#p5{font-weight: bold;}
+		
+		
+	</style>
+</head>
+
+<body>
+	<p id="p1">다람쥐 헌 쳇바퀴에 타고파</p>
+	<p id="p2">다람쥐 헌 쳇바퀴에 타고파</p>
+	<p id="p3">다람쥐 헌 쳇바퀴에 타고파</p>
+	<p id="p4">다람쥐 헌 쳇바퀴에 타고파</p>
+	<p id="p5">다람쥐 헌 쳇바퀴에 타고파</p>
+
+</body>
+</html>
+
+
+
+@ font-variant
+-> 소문자 영어를 작은 대문자로 표시해주는 속성
+
+기본 형식
+
+선택자 {font-variant : normal or small-caps; }
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월24일</title>
+	<style>
+		#p1{font-variant: normal;}
+		#p2{font-variant: small-caps;}	
+	</style>
+</head>
+
+<body>
+	<p id="p1">My name is AReum</p>
+	<p id="p2">My name is AReum</p>
+	
+</body>
+</html>
+
+
+@ font-style
+-> 글자를 이텔릭체를 표시하는 속성
+
+기본 형식
+
+선택자 { font-style : normal or italic or oblique; }
+	* italic : 처음부터 기울어진 글자가 존재
+	* oblique : 기본 글자를 기울여서 표시
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월24일</title>
+	<style>
+		#p1{font-style: normal;}
+		#p2{font-style: italic;}
+		#p3{font-style: oblique;}	
+	</style>
+</head>
+
+<body>
+	<p id="p1">My name is AReum</p>
+	<p id="p2">My name is AReum</p>
+	<p id="p3">My name is AReum</p>
+	
+</body>
+</html>
+
+
+
+@ font
+-> 글꼴 속성을 모아서 표현할 수 있는 스타일 속성
+-> font-size와 font-family는 꼭 적어야 함 (나머지는 생략 및 추가 가능함)
+
+선택자 { font : font-style font-variant font-weight font-size/line-height font-family;}
+
+* line-height는 라인 높이
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월24일</title>
+	<style>
+		#p1{font: italic bold 20px "궁서체";}
+		#p2{font: 30px;}
+		#p3{font: italic 40px "궁서체";}	
+	</style>
+</head>
+
+<body>
+	<p id="p1">My name is AReum</p>
+	<p id="p2">My name is AReum</p>
+	<p id="p3">My name is AReum</p>
+	
+</body>
+</html>
+
+
+
+@ color
+-> 글자색을 정하는 속성
+* 색상 : rgb(000,000,000) 또는 16진수 (#000000)
+
+기본 형식
+
+<style> 선택자 {color:색상;} </style>
+
+
+
+@ text-decoration
+-> 글자에 밑줄을 긋거나, 취소선을 긋거나, 윗 선을 긋거나 밑줄을 표시하지 않는 속성
+
+none		: 밑줄 삭제
+underline	: 밑줄 표시
+overline	: 윗줄 표시
+line-through	: 취소선 표시
+
+
+기본형식
+
+<style>
+선택자 {text-decoration : none | underline | overline | line-through;}
+</style>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월25일</title>
+	<style>
+		#p1{text-decoration : none;}
+		#p2{text-decoration : underline;}
+		#p3{text-decoration : line-through;}
+		#p4{text-decoration : overline;}
+		a{text-decoration : none;}
+	</style>
+</head>
+
+<body>
+	<a href="#">링크</a>
+	<p id="p1">My name is AReum</p>
+	<p id="p2">My name is AReum</p>
+	<p id="p3">My name is AReum</p>
+	<p id="p4">My name is AReum</p>
+</body>
+</html>
+
+
+
+
+
+@ text-transform
+-> 영문자를 표시할 때 대소문자를 원하는 대로 바꿀 수 있는 속성
+none	 	: 변환없이 표시
+capitalize	: 시작하는 첫번째 글자를 대문자로 변환
+uppercase	: 모든 글자를 대문자로 변환
+lowercase	: 모든 글자를 소문자로 변환
+
+기본 형식
+
+<style>
+선택자 { text-transform : none | capitalize | uppercase | lowercase; }
+</style>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월25일</title>
+	<style>
+		#p1{text-transform : none;}
+		#p2{text-transform : capitalize;}
+		#p3{text-transform : uppercase;}
+		#p4{text-transform : lowercase;}
+
+	</style>
+</head>
+
+<body>
+	<p id="p1">My name is AReum</p>
+	<p id="p2">My name is AReum</p>
+	<p id="p3">My name is AReum</p>
+	<p id="p4">My name is AReum</p>
+</body>
+</html>
+
+
+
+
+@ text-shadow
+-> 텍스트에 그림자 효과를 주는 속성
+
+none : 그림자 표현 안함
+가로값 세로값 번짐값 색상값
+-> 가로 : 그림자가 가로로 얼마나 떨어져 있는지를 지정함 (양수는 오른쪽, 음수는 왼쪽)
+-> 세로 : 그림자가 세로로 얼마나 떨어져 있는지를 지정함 (양수는 글자아래, 음수는 글자 위)
+-> 번짐 : 그림자의 번짐의 정도를 지정
+-> 색상 : 그림자의 색상을 지정함 (16진수, rgb 또는 색상 이름 지정 가능)
+
+
+기본형식
+<style>
+선택자 { text-shadow : none | 가로 세로 번짐 색상; }
+</style>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월25일</title>
+	<style>
+		@import url('https://fonts.googleapis.com/css?family=Berkshire+Swash|Modak|Pacifico|Permanent+Marker|Poiret+One');
+		
+		#p1{color:blue; text-shadow : 1px 1px 1px skyblue;}
+		#p2{color:red; text-shadow : 5px 5px 5px lavender;}
+		#p3{color:orange; text-shadow : 1px 1px 30px yellow;}
+		#p4{color:black; text-shadow : 1px -2px 1px gray,
+			1px -1px 1px yellow;}
+
+	</style>
+</head>
+
+<body>
+	<p id="p1">My name is AReum</p>
+	<p id="p2">My name is AReum</p>
+	<p id="p3">My name is AReum</p>
+	<p id="p4">My name is AReum</p>
+</body>
+</html>
+
+
+
+
+@ white-space
+-> 공백을 처리해 주는 속성
+
+normal		: 여러 개의 공백을 하나로 표시
+nowrap		: 여러 개 공백 한 개 표시 줄 바꾸지 않고 한줄 표시
+pre		: 여러 개 공백 그대로 표시, 한 줄로 표시
+pre-line	: 여러 개 공백 한 개 표시, 영역 넘어가면 자동 줄 바꿈
+pre-wrap	: 여러 개 공백 그대로 표시, 영역 넘어가면 자동 줄 바꿈
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월25일</title>
+	<style>
+		@import url('https://fonts.googleapis.com/css?family=Berkshire+Swash|Modak|Pacifico|Permanent+Marker|Poiret+One');
+		
+		#p1{white-space: normal;}
+		#p2{white-space: nowrap;}
+		#p3{white-space: pre;}
+		#p4{white-space: pre-line;}
+		#p5{white-space: pre-wrap;}
+
+	</style>
+</head>
+
+<body>
+	<p id="p1">
+	
+	
+	pre-line과 달리 시작점 고정(밑줄여러개 반영안함) /
+	여러 개의 공백을     하나로    표시  This example demonstrates the white-space property. </p>
+	<p id="p2">여러 개 공백    한 개     표시 줄 바꾸지 않고 한줄 표시 This example demonstrates the white-space property.</p>
+	<p id="p3">여러 개 공백     그대로   표시, 한 줄로 표시 This     example demonstrates the white-space property. </p>
+	<p id="p4">
+	
+	pre-line은 밑줄 띈거 반영함
+	여러 개 공백    한 개    표시, 영역 넘어가면 자동 줄 바꿈 This    example demonstrates the white-space property.</p>
+	<p id="p5"> 여러 개 공백    그대로    표시, 영역 넘어가면 자동 줄 바꿈 This example demonstrates the white-space property.</p>
+</body>
+
+
+[02-2. CSS 문단 스타일]
+
+
+
+@ direction
+-> 글자 쓰기 방향 지정 속성
+
+ltr	:왼쪽에서 오른쪽으로 텍스트를 표시
+rtl	:오른쪽에서 왼쪽으로 텍스트 표시
+
+기본형식
+
+<style>
+선택자 {direction : ltr 또는 rtl;}
+</style>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월25일</title>
+	<style>		
+		#p1{direction : ltr;}
+		#p2{direction : rtl;}
+		
+
+	</style>
+</head>
+
+<body>
+	<P id="p1">안녕하세요?!</P>
+	<P id="p2">안녕하세요?!</P>
+</body>
+</html>
+
+
+@ text-align
+-> 문자 위치를 조정(정렬)하는 속성
+
+left		: 왼쪽에 맞추어 정렬
+right		: 오른쪽에 맞추어 정렬
+center		: 가운데에 맞추어 정렬
+justify		: 양쪽에 맞추어 정렬
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월25일</title>
+	<style>
+		#p1 {
+			text-align: left;
+		}
+
+		#p2 {
+			text-align: right;
+		}
+
+		#p3 {
+			text-align: center;
+		}
+
+		#p4 {
+			text-align: justify;
+		}
+	</style>
+</head>
+
+<body>
+	<P id="p1">이 밤 그날의 반딧불을 당신의 창 가까이 보낼게요 음 사랑한다는 말이에요 나 우리의 첫 입맞춤을 떠올려 그럼 언제든 눈을 감고 음 가장 먼 곳으로 가요 난 파도가 머물던 모래 위에 적힌 글씨처럼 그대가 멀리 사라져 버릴 것 같아 늘 그리워 그리워 여기 내 마음속에 모든 말을 다 꺼내어 줄 순 없지만 사랑한다는 말이에요 어떻게 나에게 그대란 행운이 온 걸까 지금 우리 함께 있다면</P>
+	<P id="p2">난 파도가 머물던 모래 위에 적힌 글씨처럼 그대가 멀리 사라져 버릴 것 같아 늘 그리워 그리워 여기 내 마음속에 모든 말을 다 꺼내어 줄 순 없지만 사랑한다는 말이에요</P>
+	<P id="p3">어떻게 나에게 그대란 행운이 온 걸까 지금 우리 함께 있다면 아 얼마나 좋을까요 난 파도가 머물던 모래 위에 적힌 글씨처럼 그대가 멀리 사라져 버릴 것 같아 또 그리워 더 그리워
+	</P>
+	<P id="p4">나의 일기장 안에 모든 말을 다 꺼내어 줄 순 없지만 사랑한다는 말 이 밤 그날의 반딧불을 당신의 창 가까이 띄울게요 음 좋은 꿈 이길 바라요</P>
+</body>
+</html>
+
+
+
+
+
+@  text-indent
+-> 문장을 들여쓰기 하는 속성
+
+기본형식
+
+<style>
+	선택자 {text-indent : 숫자(단위); }
+</style>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월25일</title>
+	<style>
+		#p1 {text-indent: 10px;}
+		#p2 {text-indent: 20px;}
+		#p3 {text-indent: 30px;}
+		#p4 {text-indent: 40px;}
+	</style>
+</head>
+
+<body>
+	<P id="p1">이 밤 그날의 반딧불을 당신의 창 가까이 보낼게요 음 사랑한다는 말이에요 나 우리의 첫 입맞춤을 떠올려 그럼 언제든 눈을 감고 음 가장 먼 곳으로 가요 난 파도가 머물던 모래 위에 적힌 글씨처럼 그대가 멀리 사라져 버릴 것 같아 늘 그리워 그리워 </P>
+	<P id="p2">난 파도가 머물던 모래 위에 적힌 글씨처럼 그대가 멀리 사라져 버릴 것 같아 늘 그리워 그리워 여기 내 마음속에 모든 말을 다 꺼내어 줄 순 없지만 사랑한다는 말이에요</P>
+	<P id="p3">어떻게 나에게 그대란 행운이 온 걸까 지금 우리 함께 있다면 아 얼마나 좋을까요 난 파도가 머물던 모래 위에 적힌 글씨처럼 그대가 멀리 사라져 버릴 것 같아 또 그리워 더 그리워
+	</P>
+	<P id="p4">나의 일기장 안에 모든 말을 다 꺼내어 줄 순 없지만 사랑한다는 말 이 밤 그날의 반딧불을 당신의 창 가까이 띄울게요 음 좋은 꿈 이길 바라요</P>
+</body>
+</html>
+
+
+
+
+
+@ line-height
+-> 문장끼리의 줄 간격을 조정하는 속성
+
+기본 형식
+<style>
+선택자 {line-height : normal 또는 숫자(단위); }
+</style>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월25일</title>
+	<style>
+		#p1 {line-height : 10px;}
+		#p2 {line-height : 20px;}
+		#p3 {line-height : 30px;}
+		#p4 {line-height : 40px;}
+	</style>
+</head>
+
+<body>
+	줄마다의 간격<hr>
+	<P id="p1">이 밤 그날의 반딧불을 당신의 창 가까이 보낼게요 음 사랑한다는 말이에요 나 우리의 첫 입맞춤을 떠올려 그럼 언제든 눈을 감고 음 가장 먼 곳으로 가요 난 파도가 머물던 모래 위에 적힌 글씨처럼 그대가 멀리 사라져 버릴 것 같아 늘 그리워 그리워 </P>
+	<P id="p2">난 파도가 머물던 모래 위에 적힌 글씨처럼 그대가 멀리 사라져 버릴 것 같아 늘 그리워 그리워 여기 내 마음속에 모든 말을 다 꺼내어 줄 순 없지만 사랑한다는 말이에요</P>
+	<P id="p3">어떻게 나에게 그대란 행운이 온 걸까 지금 우리 함께 있다면 아 얼마나 좋을까요 난 파도가 머물던 모래 위에 적힌 글씨처럼 그대가 멀리 사라져 버릴 것 같아 또 그리워 더 그리워</P>
+	<P id="p4">나의 일기장 안에 모든 말을 다 꺼내어 줄 순 없지만 사랑한다는 말 이 밤 그날의 반딧불을 당신의 창 가까이 띄울게요 음 좋은 꿈 이길 바라요</P>
+</body>
+</html>
+
+
+
+@ text-overflow
+-> 영역을 벗어나는 텍스트 표시 속성
+clip		: 영역을 넘어가는 텍스트를 자름
+elllipsis	: 말 줄임으로 잘린 텍스트를 표현
+
+기본형식
+<style>
+선택자 { text-overflow :  clip 또는 ellipsis; }
+</style>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월25일</title>
+	<style>
+		#p1 {border:1px solid black;
+		width : 200px;
+		height: 30px;
+		white-space: nowrap;
+		overflow:hidden;
+		text-overflow:clip;}
+		#p2 {border:1px solid black;
+		width : 200px;
+		height: 30px;
+		white-space: nowrap;
+		overflow:hidden;
+		text-overflow:ellipsis;}
+	</style>
+</head>
+
+<body>
+	영역을 벗어나는 텍스트 표시<hr>
+	<P id="p1">clip/ 안녕하세요 테스트를 하기 위한 글입니다.</P>
+	<P id="p2">ellipsis/ 안녕하세요 테스트를 하기 위한 글입니다.</P>
+</body>
+</html>
+
+
+
+
+@ list-style-type
+-> 목록 기호의 스타일을 지정하는 속성
+
+ul
+-> disc		: 흑생 원형
+-> circle	: 흰색 원형
+-> square	: 흑색 사각형
+-> none		: 기호 표시 안함
+
+
+기본형식
+<style>
+선택자{list-style-type:disc | circle | square | none; }
+</style>
+
+ol
+
+-> decimal			: 1로 시작하는 십진수 형태
+-> decimal-leading-zero		: 앞에 0이 붙은 십진수 형태
+-> lower-roman / upper-roman	: 소문자 로마자	/ 대문자 로마자
+-> lower-alpha / lower-latin	: 소문자 알파벳
+-> upper-alpha / upper-latin : 	: 대문자 알파벳
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월25일</title>
+	<style>
+		#u1{list-style-type:disc;}
+		#u2{list-style-type:circle;}
+		#u3{list-style-type:square;}
+		#u4{list-style-type:none;}
+	</style>
+</head>
+
+<body>
+	<fieldset>
+		<legned>ul 테스트</legned>
+		<ul id="u1">
+			<li>test1</li>
+			<li>test2</li>
+			<li>test3</li>
+		</ul>
+		<br>
+		<ul id="u2">
+			<li>test1</li>
+			<li>test2</li>
+			<li>test3</li>
+		</ul>
+		<br>
+		<ul id="u3">
+			<li>test1</li>
+			<li>test2</li>
+			<li>test3</li>
+		</ul>
+		<br>
+		<ul id="u4">
+			<li>test1</li>
+			<li>test2</li>
+			<li>test3</li>
+		</ul>
+	</fieldset>
+</body>
+</html>
+
+
+ex2) 메뉴바 만들기
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>04월25일</title>
+	<style>
+		div{border: 1px solid black;
+		height: 100px;
+		width:800px;}
+		
+		ul li{float : left;
+			margin-left:100px;
+			list-style-type: none;
+			color:green;
+			}
+	</style>
+</head>
+
+<body>
+	<div>
+		<ul>
+			<li>메뉴1</li>
+			<li>메뉴2</li>
+			<li>메뉴3</li>
+			<li>메뉴4</li>
+			<li>메뉴5</li>
+		</ul>
+	</div>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>4월25일</title>
+    <style>
+        #ol1 {list-style-type: decimal;}
+        #ol2 {list-style-type: decimal-leading-zero;}
+        #ol3 {list-style-type: lower-roman;}
+        #ol4 {list-style-type: lower-alpha;}
+        #ol5 {list-style-type: upper-alpha;}
+        div {border: 1px solid black;height: 10px;width: 800px;}
+        ul li {float: left;margin-left: 100px;list-style-type: none;color: green;font-weight: 700;}
+    </style>
+</head>
+<body>
+    <fieldset>
+        <legend> ol 테스트 </legend>
+        <ol id="ol1">
+            <li>Test</li>
+            <li>Test</li>
+            <li>Test</li>
+        </ol>
+        <ol id="ol2">
+            <li>Test</li>
+            <li>Test</li>
+            <li>Test</li>
+        </ol>
+        <ol id="ol3">
+            <li>Test</li>
+            <li>Test</li>
+            <li>Test</li>
+        </ol>
+
+        <ol id="ol4">
+            <li>Test</li>
+            <li>Test</li>
+            <li>Test</li>
+        </ol>
+        <ol id="ol5">
+            <li>Test</li>
+            <li>Test</li>
+            <li>Test</li>
+        </ol>
+
+    </fieldset>
+</body>
+</html>
+
+
+
+
+
+@ list-style-image
+-> 기호 대신 이미지 삽입
+-> 이미지 사이즈가 너무 크면 벗어남 (10x10 픽셀이 가장 좋음)
+
+
+기본 형식
+<style>
+선택자 { list-style-image:url(이미지 경로); }
+</style>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>4월25일</title>
+    <style>
+		#ul1{list-style-image:url("img/kakao.jpg")}
+    </style>
+</head>
+<body>
+    <fieldset>
+        <legend> ul 이미지 테스트 </legend>
+        <ul id="ul1">
+        	<li>test</li>
+        	<li>test</li>
+        	<li>test</li>
+        </ul>
+
+    </fieldset>
+</body>
+</html>
+
+
+
+
+@ list-style-position
+-> 목록 기호 들여쓰기
+
+inside : 블릿이나 숫자를 안쪽으로 들여 씀
+outside : default 블릿이나 숫자를 밖으로 내어 씀(기본)
+
+
+기본 형식
+<style>
+	선택자 { list-style-position : inside 또는 outside; }
+</style>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>4월25일</title>
+    <style>
+		#ul1{list-style-position : inside;}
+		#ul2{list-style-position : outside;}
+    </style>
+</head>
+<body>
+    <fieldset>
+        <legend> ul 테스트 </legend>
+        <ul id="ul1">
+        	<li>test들여쓰기</li>
+        	<li>test</li>
+        	<li>test</li>
+        </ul>
+        
+         <ul id="ul2">
+        	<li>test</li>
+        	<li>test</li>
+        	<li>test</li>
+        </ul>
+
+    </fieldset>
+</body>
+</html>
+
+
+
+@ list-style
+->목록 스타일을 한번에 지정하는 속성
+
+기본형식
+
+<style>
+	선택자 { list-style : type값 position값 image값; }
+</style>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>4월25일</title>
+    <style>
+		#ul1{list-style : circle inside;}
+		#ul2{list-style : inside url("img/kakao.jpg")}
+    </style>
+</head>
+<body>
+    <fieldset>
+        <legend> ul 테스트 </legend>
+        <ul id="ul1">
+        	<li>test들여쓰기</li>
+        	<li>test</li>
+        	<li>test</li>
+        </ul>
+        
+         <ul id="ul2">
+        	<li>test</li>
+        	<li>test</li>
+        	<li>test</li>
+        </ul>
+
+    </fieldset>
+</body>
+</html>
+
+
+
+[03. CSS 색상 스타일]
+@ background-color
+-> 배경색을 지정하는 속성
+
+
+기본 형식
+
+선택자 { background-color : 색상표현; }
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>4월25일</title>
+    <style>
+		body{background-color:skyblue;}
+		div{width:200px; height:200px; background-color:white;}
+		div>div{width:180px; height:180px; background-color:red;}
+		div>div>div{width:150px; height:150px; background-color:orange;}
+    </style>
+</head>
+<body>
+   <div>
+   	 <div>
+   	 	 <div></div>
+   	 </div>
+   </div>
+</body>
+</html>
+
+
+@ background-clip
+-> 배경 범위 조절
+
+border-box	: 박스 모델의 가장 외곽인 테두리까지 적용
+padding-box	: 테두리를 제외한 패딩 범위까지 적용
+content-box	: 내용 부분만 적용
+
+기본 형식
+
+선택자 { background-clip : 속성값; }
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>4월25일</title>
+    <style>
+		div{height : 400px;
+			width : 400px;
+			padding : 50px;
+			border : 5px dashed black;
+			background-color : skyblue;
+			background-clip : content-box;}
+		
+    </style>
+</head>
+<body>
+   <div>
+   </div>
+</body>
+</html>
+
+
+
+@ background-image
+-> 요소에 배경지정 속성
+
+기본형식
+
+선택자 { background-image : url(경로); }
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>4월25일</title>
+    <style>
+		div{height : 400px;
+			width : 400px;
+			padding : 50px;
+			background-image: url("img/%EC%B2%9C%EB%9F%AC.PNG");
+			background-repeat : no-repeat;}
+    </style>
+</head>
+<body>
+   <div>
+   </div>
+</body>
+</html>
+
+
+
+@ background-repeat
+-> 배경이미지 반복 출력 설정
+
+repeat		: 브라우저에 가득 찰 때까지 가로/세로 반복
+repeat-x	: 너비만큼 반복 (가로)
+repeat-y	: 높이만큼 반복 (세로)
+no-repeat	: 이미지를 한번만 출력
+
+
+기본형식
+선택자 { background-repeat : 속성값; }
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>4월25일</title>
+    <style>
+		body{height : 400px;
+			width : 400px;
+			padding : 50px;
+			background-image: url("img/%EC%8A%A4%ED%8B%B0%EC%B9%98.jpg");
+			background-repeat : repeat-x;}
+    </style>
+</head>
+<body>
+ 
+</body>
+</html>
+
+
+
+@ background-position
+-> 배경 이미지 위치를 조정하는 속성
+
+left / center/ right 	수평위치
+top / center / bottom	수직위치
+크기값(px) / 백분율	수치화된 값으로 표현(가로 세로) -> 왼쪽 위 모서리 좌표
+
+
+기본 형식
+
+선택자 { background-position : 속성값; }
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>4월25일</title>
+    <style>
+		#div1{height : 450px;
+			width : 450px;
+			}
+		
+		#div2{height : 400px;
+			width : 400px;
+			border : 2px solid black;
+			background-image: url("img/%EC%8A%A4%ED%8B%B0%EC%B9%98.jpg");
+			background-repeat : no-repeat;
+			background-position : center bottom;} //가로 center 세로 bottom
+		
+		#div3{height : 450px;
+			width : 450px;
+			}
+		
+		#div4{height : 400px;
+			width : 400px;
+			border : 2px solid black;
+			background-image: url("img/%EC%8A%A4%ED%8B%B0%EC%B9%98.jpg");
+			background-repeat : no-repeat;
+			background-position : 100px 100px;}
+		
+    </style>
+</head>
+<body>
+center, bottom 이용
+<div id="div1">
+	<div id="div2"></div>
+</div>
+
+<hr>픽셀로 
+<div id="div3">
+	<div id="div4"></div>
+</div>
+ 
+</body>
+</html>
+
+
+
+@ background-origin
+-> 배경이미지를 배치할 때 기준을 지정하는 속성
+
+border-box	테두리가 기준
+padding-box	테두리를 뺀 패딩이 기준
+content-box	내용 부분이 기준
+
+
+기본 형식
+선택자 { background-origin : 속성값; }
+
+
+
+@ background-attachment
+-> 웹 페이지가 위 아래로 움직여도 배경이미지는 움직이지 않게 고정하는 속성
+
+scroll		: default, 배경이미지가 움직이게 설정
+fixed		: 배경이미지가 움직이지 않게 설정
+
+기본형식
+
+선택자 { background-attachment : 속성값;}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>4월25일</title>
+    <style>
+		body{
+			background-image: url("img/%EC%8A%A4%ED%8B%B0%EC%B9%98.jpg");
+			background-repeat : no-repeat;
+			background-attachment : fixed;}
+		
+    </style>
+</head>
+<body>
+	<h1>안녕하세요 환영합니다^.^</h1>
+	<h1>안녕하세요 환영합니다^.^</h1>
+	<h1>안녕하세요 환영합니다^.^</h1>
+	<h1>안녕하세요 환영합니다^.^</h1>
+	<h1>안녕하세요 환영합니다^.^</h1>
+	<h1>안녕하세요 환영합니다^.^</h1>
+	<h1>안녕하세요 환영합니다^.^</h1>
+	<h1>안녕하세요 환영합니다^.^</h1>
+	<h1>안녕하세요 환영합니다^.^</h1>
+	<h1>안녕하세요 환영합니다^.^</h1>
+	<h1>안녕하세요 환영합니다^.^</h1>
+	<h1>안녕하세요 환영합니다^.^</h1>
+	<h1>안녕하세요 환영합니다^.^</h1>
+	<h1>안녕하세요 환영합니다^.^</h1>
+	<h1>안녕하세요 환영합니다^.^</h1>
+	<h1>안녕하세요 환영합니다^.^</h1>
+	<h1>안녕하세요 환영합니다^.^</h1>
+	<h1>안녕하세요 환영합니다^.^</h1>
+	<h1>안녕하세요 환영합니다^.^</h1>
+	<h1>안녕하세요 환영합니다^.^</h1>
+	<h1>안녕하세요 환영합니다^.^</h1>
+	<h1>안녕하세요 환영합니다^.^</h1>
+	
+ 
+</body>
+</html>
+
+
+
+
+@ background
+-> 배경이미지 설정을 한번에 하는 속성
+
+기본형식
+<style>
+선택자 : {background : image값 repeat값 attachment값 position값 clip값 origin값 sizer값;}
+</style>
+
+
+
+
+@ 선형 그라데이션
+-> 색상이 수직, 수평, 대각선 방향으로 일정하게 변하는 것
+	- 웹 표준으로 지정되었지만 이전 버전과 호환을 위해 브라우저별
+	접두사를 이용, 그라데이션 표현 방법이 약간씩 다름
+	* 브라우저별로 다를 수 있으므로 별도로 공부 해야 함
+
+기본 형식 (표준)
+
+선택자 {background : -접두사-linear-gradient(아래와 동일)}
+
+or
+
+선택자 { background : linear-gradient(각도 or 방향, 시작색상, [색상 위치], 끝색상); }
+
+## 방향 ##
+
+to top		: 아래에서 위로 그려지는 그라데이션
+to left		: 오른쪽에서 왼쪽으로 그려지는 그라데이션
+to right	: 왼쪽에서 오른쪽으로 그려지는 그라데이션
+to bottom	: 위에서 아래로 그려지는 그라데이션
+
+## 각도 ##
+숫자 deg	: 위쪽을 기준(0도)으로 시계방향으로 각도 증가
+
+
+## 브라우저 별 접두사 ##
+-webkit-	크롬, 사파리
+-o-		오페라
+-moz-		파이어 폭스
+-ms-		익스플로러
+
+### 시작색상 / 끝색상 ##
+색상 표시	: 색단어 또는 rgb또는 16진수 표기법
+
+## 중지점 색상 / 위치 ##
+색상		: 색단어 또는 rgb또는 16진수 표기법
+위치		: 백분율(%)로 표시
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>4월25일</title>
+    <style>
+		#d1{
+			height : 300px;
+			width : 300px;
+			border : 1px solid black;
+			background: linear-gradient(to bottom, skyblue, white);
+		}
+		
+		#d2{
+			height : 200px;
+			width : 200px;
+			background: linear-gradient(45deg, aquamarine 10%, white 50%, orchid 90%);
+		}
+		
+		#d3{
+			height : 200px;
+			width : 200px;
+			background: linear-gradient(30deg,red, orange 15%, yellow 30%, green 45%, blue 60%, navy 75%, purple 90%);
+		}
+		
+    </style>
+</head>
+<body>
+	
+	<div id="d1"></div>
+	<br>
+	<div id="d2"></div>
+	<br>
+	<div id="d3"></div>
+ 
+</body>
+</html>
+
+
+
+@ 원형 그라데이션
+-> 색상이 원이나 타원의 중심부터 동심원을 그리며 바깥방향으로 색상 변경
+
+기본형식
+
+선택자 { background:접두사 radial-gradient(위치 모양, 크기, 시작색상, 끝색상); }
+	또는
+선택자 { background: radial-gradient(모양 크기 at 위치, 시작잭상, 끝색상); }
+
+* 인자값은 최소 2개 이상(시작색상과 끝 색상)
+-> 위치 및 모양에 대한 인자값이 없으면 모양은 elipse 이고, 크기는 closet-side 임
+
+## 모양 ##
+circle		원형
+ellipse		타원, default값
+
+## 크기 ##
+closest-side	원형의 중심에서 가장 가까운 변과 중심의 거리가 원형의 크기(반지름)가 됨
+closest-corner	원형의 중심에서 가장 가까운 모서리와 원형의 중심 거리가 원형의 크기
+	(반지름)가 됨
+farthest-side	원형의 중심에서 가장 먼 변과 원형 중심의 거리가 원형의 크기(반지름)가 됨
+farthest-corner	원형의 중심에서 가장 먼 모서리와 원형의 중심거리가 원형의 크기(반지름)가 됨
+
+## 위치 (x(가로좌표), y(세로 좌표)) ##
+수평위치	left / center / right
+수직위치	top / center / bottom
+백분율		페이지 기준 백분율 표현 (가로,세로 )
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>4월25일</title>
+    <style>
+		.grad{
+			height: 100px;
+			width : 100px;
+			border : 1px solid black;
+		}
+		
+		#div1{
+			background : radial-gradient(circle at 90% 90%, white, lavender, deepskyblue);
+		}
+		#div2{
+			background : radial-gradient(circle closest-side, white, lavender,deepskyblue);
+		}
+		#div3{
+			background : radial-gradient(circle closest-corner, white, lavender, deepskyblue);
+		}
+		#div4{
+			background : radial-gradient(circle farthest-side, white, lavender, deepskyblue);
+		}
+		#div5{
+			background : radial-gradient(circle farthest-corner, white, lavender, deepskyblue);
+		}	
+		
+    </style>
+</head>
+<body>
+	
+	<div id="div1" class="grad"></div>
+	<div id="div2" class="grad"></div>
+	<div id="div3" class="grad"></div>
+	<div id="div4" class="grad"></div>
+	<div id="div5" class="grad"></div>
+ 
+</body>
+</html>
+
+
+@ 그라데이션 반복 (선형)
+-> 그라데이션 패턴 요소를 다 채울때까지 반복하는 것
+
+기본 형식
+
+선택자 {
+	background : 접두사 repeating-linear-gradient(모양, 시작색상, 끝색상, 중단위치);
+}
+	또는
+선택자 {
+	background : repeating-linear-gradient(모양, 시작색상, 끝색상, 중단위치);
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>4월25일</title>
+    <style>
+		.grad{
+			height: 100px;
+			width : 100px;
+			border : 1px solid black;
+		}
+		
+		#div1{
+			background : repeating-linear-gradient(white,blue,red 50%)
+		}
+		#div2{
+			background : repeating-linear-gradient(to left,white,blue,red 50%)
+		}
+    </style>
+</head>
+<body>
+	<div id="div1" class="grad"></div>
+	<div id="div2" class="grad"></div>
+</body>
+</html>
+
+
+@ 그라데이션 반복 (원형)
+-> 선형과 같이 패턴 요소를 다 채울때까지 반복하는 것 (원형으로)
+
+기본 형식
+
+선택자 {
+	background : 접두사 repeating-radial-gradient(모양, 시작색상, 끝색상, 중단위치);
+}
+	또는
+선택자 {
+	background : repeating-radial-gradient(모양, 시작색상, 끝색상, 중단위치);
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>4월25일</title>
+    <style>
+		.grad{
+			height: 100px;
+			width : 100px;
+			border : 1px solid black;
+		}
+		
+		#div1{
+			background : repeating-radial-gradient(white,skyblue,blue 50%)
+		}
+    </style>
+</head>
+<body>
+	<div id="div1" class="grad"></div>
+</body>
+</html>
+
+
+
+[04. CSS 레이아웃 스타일]
+
+
+@ height / width
+-> 컨텐츠(내용)이 차지하고 있는 영역의 크기를 조절할 수 있는 속성
+
+선택자 {
+	width : 숫자(단위);
+	height : 숫자(단위);
+}
+
+
+-> height 값으로 크기를 조절하려면 블록 레벨 요소여야 함
+
+
+@ 블록 레벨 요소와 인라인 레벨 요소
+-> html 태그에는 블록과 인라인 형태가 있음
+
+## 블록레벨 요소 ##
+-> 한 줄 전체를 차지하는 요소 (박스 모델이라고도 함)
+-> 한 줄에 여러 요소가 올 수 없음
+-> 블록 단위이기 때문에 크기 조절이 가능
+-> 자동 줄 개행이 됨
+-> 종류 : div, h1~h6 태그, p 태그, 목록 태그 등등..
+
+
+## 인라인 레벨 요소 ##
+-> 한 줄에서 일부분만 차지하는 요소
+-> 한 줄에 여러 요소가 올 수 있음
+-> 한 부분만 해당되기 때문에 크기 조절이 불가능
+-> 자동 줄 개행을 안함
+-> 종류 : span, a 태그, input 태그, 글자형식 태그 등...
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>4월26일</title>
+    <style>
+		p{border:1px solid black;}
+		span{border:1px solid black;}
+    </style>
+</head>
+<body>
+	<p>내용</p>
+	<p>내용</p>
+	<p>내용</p>
+	<span>내용</span><span>내용</span><span>내용</span><span>내용</span>
+</body>
+</html>
+
+
+
+
+@ display 속성
+-> 해당 태그의 기본적인 눈에 보이는 속성을 변경하는 속성값
+-> 대표적인 display 속성에는 block, inline, none, inline-block이 있음
+	(더 많이 있음)
+
+## none 속성 ##
+-> 말 그대로 없애는 속성
+
+## block 속성 ##
+-> inline 레벨 요소 태그를 block 속성으로 변경
+-> block 속성으로 변경되면 inline 요소라 하더라도 크기를 조절할 수 있음
+
+
+## inline-block 속성 ##
+-> 텍스트는 inline 이지만 (줄개행 안함) 영역 표시를 block 단위로 처리하고 싶을때 사용하는 속성
+
+## inline 속성 ##
+-> block 레벨 요소 태그를 inline 속성으로 변경
+
+## border-style ##
+-> 테두리 스타일 지정
+
+
+none	: 테두리가 나타나지 않음 (기본값) - 우선순위 최하위
+hidden	: 테두리가 나타나지 않음 (none과 같음) - 우선순위 최상위
+dashed	: 짧은 (dotted 보다 긴 실선) 점선으로 표시
+dotted	: 점섬의 테두리로 지정
+double	: 두 개의 실선으로 지정
+groove	: 테두리가 안으로 파진 것처럼 보임
+inset	: 테두리를 포함한 컨텐츠 영역이 안으로 들어간것처럼 보임
+ridge	: 테두리가 밖으로 튀어나온것처럼 보임
+solid	: 실선으로 지정
+
+
+ex1)
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>4월26일</title>
+    <style>
+		#b1:active{
+			display : none;
+		}
+		
+		.display-test{
+			border : 1px solid black;
+			height : 100px;
+			width : 100px;
+		}
+		
+		#s1{ background-color : lightgoldenrodyellow;}
+		#s2{ background-color : lightpink}
+		#s3{ background-color : lightblue}
+		#s4{ background-color : lightskyblue; display : inline-block;}
+		#s5{ background-color : lightcoral; display : block;}
+		
+		#d1{ background-color : lightgoldenrodyellow; display : inline;}
+		#d2{ background-color : lightpink; display : inline;}
+		#d3{ background-color : lightblue; display : inline;}
+		#d4{ background-color : lightskyblue; display : inline;}
+		#d5{ background-color : lightcoral; display : inline;}
+    </style>
+</head>
+<body>
+	<button id="b1">none속성 / 누르면 버튼이 사라져요!</button><br><br>
+	<span id="s1" class="display-test">내용1</span>
+	<span id="s2" class="display-test">내용2</span>
+	<span id="s3" class="display-test">내용3</span>
+	<span id="s4" class="display-test">inline-block</span>
+	<span id="s5" class="display-test">block</span><br><hr><br>
+	
+	<div id="d1">내용1</div>
+	<div id="d2">내용2</div>
+	<div id="d3">내용3</div>
+	<div id="d4">내용4</div>
+	<div id="d5">내용5</div>
+</body>
+</html>
+
+
+ex2)
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>4월26일</title>
+    <style>
+	
+		.display-test{
+			border : 5px;
+			height : 100px;
+			width : 100px;
+		}
+		
+		#d1{ border-style : dotted;}
+		#d2{ border-style : dashed;}
+		#d3{ border-style : double;}
+		#d4{ border-style : groove;}
+		#d5{ border-style : inset;}
+		#d6{ border-style : outset;}
+		#d7{ border-style : ridge;}
+    </style>
+</head>
+<body>
+	<div id="d1" class="display-test"></div><br>
+	<div id="d2" class="display-test"></div><br>
+	<div id="d3" class="display-test"></div><br>
+	<div id="d4" class="display-test"></div><br>
+	<div id="d5" class="display-test"></div><br>
+	<div id="d6" class="display-test"></div><br>
+	<div id="d7" class="display-test"></div><br>
+</body>
+</html>
+
+
+
+## border-width ##
+-> 테두리의 두께를 정하는 속성
+
+선택자 {
+	border-[위치]-width : 숫자(단위) 또는 속성값;
+}
+
+
+속성값	: thin(얇게), medium(중간 크기), thick(두껍게)
+숫자	: 두께 정도 표시
+위치	: top, right, left, bottom
+
+* 위치를 설정하지 않고 작성시 시계 방향으로 (top-right-bottom-left) 각 위치별 설정 가능
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>4월26일</title>
+    <style>
+	
+		.display-test{
+			border : 1px solid black;
+			height : 100px;
+			width : 100px;
+		}
+		
+		#d1{ border-top-width : thick;}
+		#d2{ border-right-width : thick;}
+		#d3{ border-bottom-width : thick;}
+		#d4{ border-left-width : thick;}
+		#d5{ border-width : thick;}
+		#d6{ border-width : thick thin thick thin;}
+
+    </style>
+</head>
+<body>
+	<div id="d1" class="display-test"></div><br>
+	<div id="d2" class="display-test"></div><br>
+	<div id="d3" class="display-test"></div><br>
+	<div id="d4" class="display-test"></div><br>
+	<div id="d5" class="display-test"></div><br>
+	<div id="d6" class="display-test"></div><br>
+</body>
+</html>
+
+
+
+## border-color ##
+-> 테두리의 색상을 정하는 속성
+
+선택자 { border-[위치]-color : 색상값; }
+
+* border-width와 같이 각 테두리별 설정하려면 위치(top,right,bottom,left)를 정할 수 있고,
+ 한번에 설정하는 것은 border-color를 사용함
+
+
+## border ##
+-> 테두리 두께, 스타일, 색상을 한번에 지정할 수 있는 속성
+
+선택자 { border-[위치] : 두께 스타일 색상값; }
+
+
+
+## border-radius ##
+-> 박스의 모서리를 둥글게 하는 속성
+-> 위치 : top-left, top-right, bottom-left, bottom-right
+
+선택자 { border-[위치]-radius : 숫자(단위); }
+
+* 각 테두리의 변에서부터 설정한 값만큼의 반지름을 가지는 원이 모서리에 그려지고 
+그 외곽부분이 그 원을 따라 둥글게 됨
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>4월26일</title>
+    <style>
+	
+		.display-test{
+			border : 1px solid black;
+			height : 100px;
+			width : 100px;
+		}
+		
+		#d1{ border-top-left-radius : 50px; }
+		#d2{ border-top-right-radius : 50px;}
+		#d3{ border-bottom-left-radius : 50px;}
+		#d4{ border-bottom-right-radius : 50px;}
+		#d5{ border-radius : 50px;}
+    </style>
+</head>
+<body>
+	<div id="d1" class="display-test"></div><br>
+	<div id="d2" class="display-test"></div><br>
+	<div id="d3" class="display-test"></div><br>
+	<div id="d4" class="display-test"></div><br>
+	<div id="d5" class="display-test"></div><br>
+</body>
+</html>
+
+
+
+@ 여백 스타일
+-> 여백은 블록 요소의 상하좌우에 빈 공간을 두는 것
+-> 요소끼리 너무 인접해 있으면 시각적으로 갑갑해 보일 뿐만 아니라 터치 환경세서
+정확한 터치 입력도 어려움
+-> 여백 스타일에는 margin(마진), padding(패딩)이 있음
+
+
+margin
+- 요소의 바깥쪽에 배치되는 여백이며 외부의 부모나 형제 사이에 삽입되는 빈 공간
+- 요소의 크기에서 제외됨
+
+padding
+- 요소의 안쪽에 배치되는 여백이며 요소의 경계선과 내용물 사이에 삽입되는 빈 공간
+- 요소의 크기에 포함 됨
+
+
+## margin ##
+-> box레벨이나 inline 레벨의 요소들간의 간격을 조절하는 속성
+
+선택자 { margin-[위치] : 숫자(단위); }
+
+
+## padding ##
+-> 테두리(border)와 내용(content) 영역 사이의 거리를 조절하는 속성
+선택자 { padding-[위치] : 숫자(단위); }
+
+
+
+
+@ 포지셔닝
+-> box 모델(block), inline 모델을 페이지상에서 배치하는 스타일
+-> 즉, 페이지 안 요소들을 원하는 위치에 배치하는 속성을 의미
+-> position 스타일, float 스타일이 있음
+
+
+
+## position ##
+-> 페이지의 요소들을 자유롭게 배치해 주는 속성
+-> top, left, right, bottom으로 위치 지정
+
+static		: 요소를 문서의 흐름에 맞춰 배치(default) - 위치가 지정되지 않음
+relative	: 자연스럽게 배치, top,left,right,bottom 을 통해 위치 지정이 가능
+		, 요소가 겹쳐지지 않음
+absolute	: 원하는 위치에 배치, 요소들이 겹쳐질 수 있음
+		, 부모를 기준으로 기준으로 위치 좌표를 ㅈ설정할 수있음
+fixed		:지정한 위치에 고정 배치(스크롤을 내리더라도 따라 내려감)
+
+선택자{
+	position : 속성값
+	[위치:숫자(단위)];
+}
+
+
+## z-index ##
+-> 페이지 안의 요소들을 순서대로 위로 쌓는 속성
+-> 속성 값이 크면 가장 위에 있는 요소, 작으면 밑에 있는 속성
+
+* 항상 맨위에 요소가 위치해야 한다면 값을 999 또는 1000으로 설정
+	(큰 값이 맨 위로 감)
+
+선택자{
+	z-index:속성값;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>4월26일</title>
+	<style>
+		#wrap {
+			border: 3px solid red;
+			width: 300px;
+			height: 300px;
+		}
+
+		.test {
+			position: absolute;
+			width: 100px;
+			height: 100px;
+		}
+
+		#test1 {
+			background-color: blue;
+			z-index: 10;
+		}
+
+		#test2 {
+			background-color: beige;
+			z-index: 11;
+		}
+
+		#test3 {
+			background-color: plum;
+			z-index: 12;
+		}
+	</style>
+</head>
+
+<body>
+	<script>
+		var zindex = 10;
+		var index = 1;
+
+		function myfunc() {
+			var arr = document.getElementsByTagName("div");
+			arr[index].style.zIndex = zindex;
+			zindex++;
+			index++;
+			if (index == 4) {
+				index = 1;
+			}
+		}
+	</script>
+
+	<div id="wrap">
+		<div id="test1" class="test"></div>
+		<div id="test2" class="test"></div>
+		<div id="test3" class="test"></div>
+	</div>
+	<button onclick="myfunc();">색깔 바꾸기</button>
+</body>
+</html>
+
+
+
+
+
+@ float
+-> 페이지 내의 요소 위치를 왼쪽이나 오른쪽으로 지정하는 속성
+
+right	: 오른쪽 배치
+left	: 왼쪽 배치
+none	: 배치 값을 설정하지 않음
+
+선택자 {float : 속성값; }
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>4월27일</title>
+	<style>
+		div{float : left;}
+		
+		#div1{border:1px solid black;
+			height: 100px;
+			width : 100px;
+		}
+		#div2{border:1px solid black;
+			height: 100px;
+			width : 100px;
+		}
+	</style>
+</head>
+<body>
+	<div id="div1">block요소지만</div>
+	<div id="div2">float:left속성으로 오른쪽으로 나열됨</div>
+</body>
+</html>
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>4월27일</title>
+	<style>
+		li{float : left;
+			margin : 10px;
+			list-style:none;}
+		
+		#div1{border:1px solid black;
+			height: 100px;
+			width : 100px;
+		}
+		#div2{border:1px solid black;
+			height: 100px;
+			width : 100px;
+		}
+	</style>
+</head>
+<body>
+<fieldset>
+	<legend>보기</legend>
+	<ul>
+		<li>메일</li>
+		<li>뉴스</li>
+		<li>카페</li>
+	</ul>
+</fieldset>	
+</body>
+</html>
+
+
+## clear ## 
+-> 페이지에 float 설정이 되어있으면 그 속성이 그대로 다음 요소에 영향을 미치게 됨
+-> 이때 이 속성을 초기화 하는 속성
+
+right	: 오른쪽으로 배치 취소
+left	: 왼쪽 배치 취소
+none	: 설정하지 않음(앞에 내용 그대로 적용)
+both	: 두 개 다 취소
+
+선택자 { clear : 속성값; }
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>4월27일</title>
+	<style>
+		div{border : 1px solid black;
+			height: 100px;
+			width : 100px;}
+		
+		#div1{float:left;}
+		#div2{float : left;}
+		#div3{clear : left;}
+	</style>
+</head>
+<body>
+
+	<div id="div1">div1</div>
+	<div id="div2">div2</div>
+	<div id="div3">div3
+	clear:left->
+	left속성 취소</div>
+
+</body>
+</html>
+
+
+
+## overflow ##
+-> 표현하는 컨텐츠가 넘쳤을때 표현하는 기법
+
+scroll	: 가로,세로 스크롤이 무조건 생김
+auto	: 스크롤이 내용에 따라 생김
+hidden	: 넘치는 것을 보여주지 않음
+visible	: 기본값, 넘치더라도 그냥 보여줌
+
+
+선택자 { overflow : 속성값; }
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>4월27일</title>
+	<style>
+		div{border : 1px solid black;
+			height: 100px;
+			width : 100px;}
+		
+		#div1{overflow : auto;}
+	</style>
+</head>
+<body>
+	<div id="div1">정식 명칭은 귀선(龜船)이다. 거북선은 조선 수군의 주력 전선인 판옥선(板屋船)의 상체 부분을 개량해서 덮개를 덮은 구조이다. 판옥선은 바닥이 평평한 선체 위에 그보다 폭이 넓은 갑판을 2층 구조로 만든 전선이다. 1층 갑판에는 한국식 노를 설치하여 격군들이 노를 젓고, 2층에는 사령부가 위치하는 ‘장대’를 설치하고, 갑판 둘레에는 방패를 두르고 각종 화포를 장착하였다. ‘상장’의 1층은 노역 공간, 2층은 전투 공간이었던 셈이다. 거북선은 바로 이와 같은 판옥선의 상장 부분을 개량해 덮개를 만든 구조였던 것이다.
+</div>
+</body>
+</html>
+
+
+
+
+## box-sizing ##
+-> 요소들은 모두 content 영역과 padding 영역, margin 영역으로 나누어져 있음
+-> 이 요소들의 크기(width 속성)를 어떠한 영역까지 포함할 것인지를 결정하는 속성
+
+content-box	: default 값, 컨텐츠 영역으로 설정
+border-box	: border까지 영역으로 설정
+
+* 쉽게 이야기 하면
+content-box는 size(width,height)를 정해주게 되면 content의 영역 크기만을 말하는 것
+border-box는 size(width, height)를 정해주게 되면 content, padding, border 영역을 
+포함한 크기를 말하는 것
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>4월27일</title>
+	<style>
+		div{border : 20px solid black;
+			height: 200px;
+			width : 200px;}
+		
+		#div1{box-sizing : border-box;}
+		#div2{box-sizing : content-box;}
+	</style>
+</head>
+<body>
+	<div id="div1">div1</div>
+	<div id="div2">div2</div>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>4월27일</title>
+	<style>
+		#wrap{
+			border : 1px solid black;
+			height:400px;
+			width : 400px;
+		}
+		div{border : 1px solid black;}
+		
+		#div1{height:100%;
+			width : 50%;
+			background-color: lightblue;
+			float: left;
+			box-sizing : border-box;
+		}
+		#div2{height:100%;
+			width : 50%;
+			background-color: lightpink;
+			float: left;
+			box-sizing : border-box;}
+	</style>
+</head>
+<body>
+<div id="wrap">
+	<div id="div1">div1</div>
+	<div id="div2">div2</div>
+</div>
+</body>
+</html>
+
+
+
+[05.CSS 애니메이션]
+
+
+@ 애니메이션
+-> 애니메이션은 속성을 점차적으로 변화시켜 움직이는 효과를 내는 기법
+
+
+
+## 애니메이션에서 사용하는 속성 ##
+
+animation-delay
+-> 엘리먼트가 로드되고 나서 언제 애니메이션이 시작될지 지정
+
+animation-direction
+-> 애니메이션이 종료되고 다시 처음부터 시작할지 역방향으로 진행할지 지정
+
+animation-duration
+-> 한 싸이클의 애니메이션이 얼마나 걸려 일어날지 지정
+
+animation-iteration-count
+-> 애니메이션이 몇 번 반복될지 지정
+-> infinite로 지정하면 무한히 반복될 수 있음
+
+animation-name
+-> 애니메이션의 중간 상태를 지정
+-> 중간상태는 @keyframes 규칙을 이용하여 기술
+
+animation-timing-function
+-> 중간 상태들의 전환을 어떤 시간간격으로 진행할지 지정
+
+
+
+## 전환 ##
+-> CSS의 hover를 이용하여 글자의 크기 전환을 하는 것
+
+
+## transition-duration ##
+-> 변환시킬 지속 시간을 지정할 수 있음
+
+## transition-delay ##
+-> delay 속성을 주게 되면 애니메이션이 시작될때까지의 시간을 설정할 수 있음
+
+## 역전환 ##
+-> 커서가 올라갈때 글씨가 커지는 전환 기법을 적용하게 되면 글씨가 커지게 됨
+-> 이때, 글씨가 커진 후 커서가 빠져나가게 되면 글씨가 빠른 속도로 줄어듦
+-> 역전환 기법을 이용하여 글씨의 크기가 원래대로 복귀할때 속도를 줄 수 있음
+	(부드러운 효과를 줄때 사용함)
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>4월27일</title>
+	<style>
+		div{
+			width:300px;
+			height:100px;
+			margin:10px;
+			background-color: lightblue;
+			font-size:20px;
+			border: 1px solid gray;
+			text-align: center;
+			line-height: 100px;
+			transition-duration: 2s;	/*역전환 기법*/
+		}
+		
+		div:hover{
+			font-size:50px;
+			transition-duration: 3s;
+			transition-delay:0.5s;
+			
+		}
+	</style>
+</head>
+<body>
+	<div id="div1">div1</div>
+	<div id="div2">div2</div>
+	<div id="div3">div3</div>
+</body>
+</html>
+
+
+
+@ 키 프레임 사용
+-> 키 프레임을 사용하면 애니메이션의 중간 설정을 줄 수 있음
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>4월27일</title>
+	<style>
+		div{
+			width:300px;
+			height:100px;
+			margin:10px;
+			background-color: lightblue;
+			font-size:20px;
+			border: 1px solid gray;
+			text-align: center;
+			line-height: 100px;
+		}
+		
+		div:hover{
+			animation-duration : 10s;
+			animation-name:hello;
+		}
+		
+		@keyframes hello{
+			from{
+				font-size: 10px;
+			}
+			50%{
+				background-color:lightpink;
+			}
+			to{
+				font-size: 50px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div id="div1">div1</div>
+	<div id="div2">div2</div>
+	<div id="div3">div3</div>
+</body>
+</html>
+
+
+
+
+
+## 애니메이션 반복하기 ##
+-> animation-iteration-count를 사용하면 애니메이션이 반복됨
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>4월29일</title>
+	<style>
+		div{
+			width:300px;
+			height:100px;
+			margin:10px;
+			background-color: lightblue;
+			font-size:20px;
+			border: 1px solid gray;
+			text-align: center;
+			line-height: 100px;
+			animation-iteration-count:2; /*2번 반복*/
+			/*animation-iteration-count : infinite; -> 무한 반복*/
+		}
+		
+		div:hover{
+			animation-duration : 10s;
+			animation-name:hello;
+		}
+		
+		@keyframes hello{
+			from{
+				font-size: 10px;
+			}
+			25%{
+				background-color:lightpink;
+			}
+			75%{
+				background-color : aquamarine;
+			}
+			to{
+				font-size: 50px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div id="div1">div1</div>
+	<div id="div2">div2</div>
+	<div id="div3">div3</div>
+</body>
+</html>
+
+
+
+## 애니메이션 앞뒤로 움직이기 ##
+-> animation-direction 속성을 alternate로 지정하면 앞뒤로 반복됨
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>4월29일</title>
+	<style>
+		div{
+			width:300px;
+			height:100px;
+			margin:10px;
+			background-color: lightblue;
+			font-size:20px;
+			border: 1px solid gray;
+			text-align: center;
+			line-height: 100px;
+			animation-iteration-count : infinite; -> /*무한 반복*/
+			animation-direction : alternate;
+		}
+		
+		div:hover{
+			animation-duration : 2s;
+			animation-name:hello;
+		}
+		
+		@keyframes hello{
+			from{
+				font-size: 10px;
+			}
+			25%{
+				background-color:lightpink;
+			}
+			75%{
+				background-color : aquamarine;
+			}
+			to{
+				font-size: 50px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div id="div1">div1</div>
+	<div id="div2">div2</div>
+	<div id="div3">div3</div>
+</body>
+</html>
+
+
+
+@ transform
+-> transform을 이용하면 회전, 크기 조절, 이동, 기울기 등의 여러 작업을 할 수 있음
+-> 다양한 속성을 가지고 2D나 3D를 표현할 수 있음
+
+
+
+## rotate ##
+-> 지정한 각도만큼 요소를 시계방향(양수값)이나 반대방향(음수값)으로 회전 시키는 함수
+
+선택자 {
+	transform : rotate(값deg);
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>4월29일</title>
+	<style>
+		@keyframes trans{
+			from{
+				background-color: green;
+				border:1px solid black;
+			}
+			to{
+				background-color : yellow;
+				border-radius : 50%;
+				border : 3px solid red;
+				transform : rotate(360deg);
+			}
+		}
+		
+		#div1:active{
+			animation-name : trans;
+			animation-duration : 3s;
+		}
+		
+		#div1{
+			animation-direction : alternate;/*normal -> from에서 to로 reverse->to에서 from으로*/
+			animation-iteration-count: infinite;
+			width : 100px;
+			height: 100px;
+			margin : 100px;
+			line-height: 100px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div id="div1">클릭</div>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>4월29일</title>
+	<style>
+		@keyframes trans{
+			from{
+			}
+			to{
+				transform : rotate(15deg);
+			}
+		}
+		
+		#div1:hover{
+			animation-name : trans;
+		}
+		
+		#div1{
+			animation-direction : alternate;
+			animation-duration : 1s;
+			animation-iteration-count: infinite;
+			width : 100px;
+			height: 100px;
+			margin : 100px;
+			line-height: 100px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div id="div1"><img src="img/chip.jpg"></div>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>4월29일</title>
+	<style>
+		
+		#polaroid{
+			position : relative;
+			margin : 50px;
+			width : 300px;
+			border: 1px solid #bfbfbf;
+			padding : 10px 10px 20px 10px;
+			transform : rotate(9deg);
+			box-shadow: 5px 5px 10px rgba(135,139,133,0.4)
+		}
+		
+		#polaroid2{
+			position : relative;
+			margin : 50px;
+			width : 300px;
+			border: 1px solid #bfbfbf;
+			padding : 10px 10px 20px 10px;
+			transform : rotate(-5deg);
+			box-shadow: 5px 5px 10px rgba(135,139,133,0.4);
+			background-color : lightpink;
+		}
+		
+		
+		
+		img{
+			border : 1px solid  gray;
+		}
+	</style>
+</head>
+<body>
+	<div id="polaroid">
+		<img src="img/river1.PNG" width="300" height="180"/>
+		<p>저녁 노을이 깊어가고 있었다...</p>
+	</div>
+	
+	<div id="polaroid2">
+		<img src="img/chip.jpg" width="300" height="180"/>
+		<p>귀여운 칩과 데일</p>
+	</div>
+	
+</body>
+</html>
